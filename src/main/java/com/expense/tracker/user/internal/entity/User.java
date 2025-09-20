@@ -2,6 +2,7 @@ package com.expense.tracker.user.internal.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,13 +17,14 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userId;
+    private Long userId;
+
+    @Column(unique = true, nullable = false)
+    private String email;
 
     private String name;
 
-    @Column(unique = true)
-    private String email;
-
+    @Column(name = "google_id", unique = true)
     private String googleId;
 
     private LocalDateTime createdAt = LocalDateTime.now();

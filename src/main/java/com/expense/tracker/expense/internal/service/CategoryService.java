@@ -31,7 +31,6 @@ public class CategoryService {
                 .filter(category -> category.getUserId().equals(userId))
                 .map(existing -> {
                     existing.setName(updated.getName());
-                    existing.setDescription(updated.getDescription());
                     existing.setCategoryType(updated.getCategoryType());
                     return repository.save(existing);
                 }).orElseThrow(() -> new RuntimeException("Category not found"));

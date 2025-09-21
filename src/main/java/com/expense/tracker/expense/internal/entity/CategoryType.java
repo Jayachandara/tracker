@@ -21,16 +21,8 @@ public class CategoryType {
     @Column(nullable = false, unique = true, length = 100)
     private String name;
 
-    private String description;
-
     @Column(nullable = false)
     private Long userId;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_group_id", nullable = false)
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private CategoryGroup categoryGroup;
 
     @OneToMany(mappedBy = "categoryType", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude

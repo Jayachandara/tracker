@@ -5,43 +5,21 @@ import com.expense.tracker.expense.internal.entity.*;
 
 public class Mapper {
 
-    public static CategoryGroupDTO toDTO(CategoryGroup entity) {
-        if(entity == null) return null;
-        return CategoryGroupDTO.builder()
-                .categoryGroupId(entity.getCategoryGroupId())
-                .userId(entity.getUserId())
-                .name(entity.getName())
-                .build();
-    }
-
-    public static CategoryGroup toEntity(CategoryGroupDTO dto) {
-        if(dto == null) return null;
-        return CategoryGroup.builder()
-                .categoryGroupId(dto.getCategoryGroupId())
-                .userId(dto.getUserId())
-                .name(dto.getName())
-                .build();
-    }
-
     public static CategoryTypeDTO toDTO(CategoryType entity) {
         if(entity == null) return null;
         return CategoryTypeDTO.builder()
                 .categoryTypeId(entity.getCategoryTypeId())
                 .userId(entity.getUserId())
-                .categoryGroupId(entity.getCategoryGroup().getCategoryGroupId())
                 .name(entity.getName())
-                .description(entity.getDescription())
                 .build();
     }
 
-    public static CategoryType toEntity(CategoryTypeDTO dto, CategoryGroup group) {
+    public static CategoryType toEntity(CategoryTypeDTO dto) {
         if(dto == null) return null;
         return CategoryType.builder()
                 .categoryTypeId(dto.getCategoryTypeId())
                 .userId(dto.getUserId())
-                .categoryGroup(group)
                 .name(dto.getName())
-                .description(dto.getDescription())
                 .build();
     }
 
@@ -51,8 +29,8 @@ public class Mapper {
                 .categoryId(entity.getCategoryId())
                 .userId(entity.getUserId())
                 .categoryTypeId(entity.getCategoryType().getCategoryTypeId())
+                .categoryGroup(entity.getCategoryGroup())
                 .name(entity.getName())
-                .description(entity.getDescription())
                 .build();
     }
 
@@ -62,28 +40,8 @@ public class Mapper {
                 .categoryId(dto.getCategoryId())
                 .userId(dto.getUserId())
                 .categoryType(type)
+                .categoryGroup(dto.getCategoryGroup())
                 .name(dto.getName())
-                .description(dto.getDescription())
-                .build();
-    }
-
-    public static PaymentTypeDTO toDTO(PaymentType entity) {
-        if(entity == null) return null;
-        return PaymentTypeDTO.builder()
-                .paymentId(entity.getPaymentId())
-                .userId(entity.getUserId())
-                .name(entity.getName())
-                .description(entity.getDescription())
-                .build();
-    }
-
-    public static PaymentType toEntity(PaymentTypeDTO dto) {
-        if(dto == null) return null;
-        return PaymentType.builder()
-                .paymentId(dto.getPaymentId())
-                .userId(dto.getUserId())
-                .name(dto.getName())
-                .description(dto.getDescription())
                 .build();
     }
 
@@ -95,12 +53,12 @@ public class Mapper {
                 .amount(entity.getAmount())
                 .transactionDate(entity.getTransactionDate())
                 .categoryId(entity.getCategory().getCategoryId())
-                .paymentTypeId(entity.getPaymentType().getPaymentId())
+                .paymentType(entity.getPaymentType())
                 .description(entity.getDescription())
                 .build();
     }
 
-    public static Transaction toEntity(TransactionDTO dto, Category category, PaymentType paymentType) {
+    public static Transaction toEntity(TransactionDTO dto, Category category) {
         if(dto == null) return null;
         return Transaction.builder()
                 .transactionId(dto.getTransactionId())
@@ -108,7 +66,7 @@ public class Mapper {
                 .amount(dto.getAmount())
                 .transactionDate(dto.getTransactionDate())
                 .category(category)
-                .paymentType(paymentType)
+                .paymentType(dto.getPaymentType())
                 .description(dto.getDescription())
                 .build();
     }

@@ -1,5 +1,6 @@
 package com.expense.tracker.expense.internal.entity;
 
+import com.expense.tracker.expense.utilities.defaults.CategoryGroupEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,8 +20,6 @@ public class Category {
     @Column(nullable = false, length = 100)
     private String name;
 
-    private String description;
-
     @Column(nullable = false)
     private Long userId;
 
@@ -29,4 +28,7 @@ public class Category {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private CategoryType categoryType;
+
+    @Enumerated(EnumType.STRING)
+    private CategoryGroupEnum categoryGroup;
 }

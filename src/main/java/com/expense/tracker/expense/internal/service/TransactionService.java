@@ -1,7 +1,5 @@
 package com.expense.tracker.expense.internal.service;
 
-import com.expense.tracker.expense.internal.entity.Category;
-import com.expense.tracker.expense.internal.entity.PaymentType;
 import com.expense.tracker.expense.internal.entity.Transaction;
 import com.expense.tracker.expense.internal.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;

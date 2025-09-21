@@ -1,5 +1,6 @@
 package com.expense.tracker.expense.internal.entity;
 
+import com.expense.tracker.expense.utilities.defaults.PaymentTypeEnum;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
@@ -29,11 +30,8 @@ public class Transaction {
     @EqualsAndHashCode.Exclude
     private Category category;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "payment_type_id", nullable = false)
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private PaymentType paymentType;
+    @Enumerated(EnumType.STRING)
+    private PaymentTypeEnum paymentType;
 
     private String description;
 

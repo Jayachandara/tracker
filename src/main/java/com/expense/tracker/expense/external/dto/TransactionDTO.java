@@ -1,5 +1,6 @@
 package com.expense.tracker.expense.external.dto;
 
+import com.expense.tracker.expense.utilities.defaults.PaymentTypeEnum;
 import lombok.*;
 import java.time.LocalDateTime;
 
@@ -13,6 +14,6 @@ public class TransactionDTO {
     private Double amount;
     private LocalDateTime transactionDate;
     private Long categoryId;
-    private Long paymentTypeId;
+    private PaymentTypeEnum paymentType;
     private String description;
 }

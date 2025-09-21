@@ -1,7 +1,6 @@
 package com.expense.tracker.expense.internal.repository;
 
 
-import com.expense.tracker.expense.internal.entity.CategoryGroup;
 import com.expense.tracker.expense.internal.entity.CategoryType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -17,4 +16,6 @@ public interface CategoryTypeRepository extends JpaRepository<CategoryType, Long
     List<CategoryType> findByUserIdAndCategoryGroup_Id(Long userId, Long groupId);
 
     Optional<CategoryType> findByUserIdAndName(Long userId, String name);
+
+    boolean existsByUserId(Long userId);
 }

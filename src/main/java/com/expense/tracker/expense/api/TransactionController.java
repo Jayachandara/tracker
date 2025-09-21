@@ -2,10 +2,8 @@ package com.expense.tracker.expense.api;
 
 import com.expense.tracker.expense.external.dto.TransactionDTO;
 import com.expense.tracker.expense.internal.entity.Category;
-import com.expense.tracker.expense.internal.entity.PaymentType;
 import com.expense.tracker.expense.internal.entity.Transaction;
 import com.expense.tracker.expense.internal.service.CategoryService;
-import com.expense.tracker.expense.internal.service.PaymentTypeService;
 import com.expense.tracker.expense.internal.service.TransactionService;
 import com.expense.tracker.expense.utilities.Mapper;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +19,6 @@ public class TransactionController {
 
     private final TransactionService service;
     private final CategoryService categoryService;
-    private final PaymentTypeService paymentTypeService;
 
     @GetMapping
     public List<TransactionDTO> getAll(@RequestParam Long userId) {
@@ -42,9 +39,7 @@ public class TransactionController {
     public TransactionDTO create(@RequestParam Long userId, @RequestBody TransactionDTO dto) {
         Category category = categoryService.getById(dto.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
-        PaymentType paymentType = paymentTypeService.getById(dto.getPaymentTypeId())
-                .orElseThrow(() -> new RuntimeException("PaymentType not found"));
-        Transaction entity = Mapper.toEntity(dto, category, paymentType);
+        Transaction entity = Mapper.toEntity(dto, category);
         entity.setUserId(userId);
         return Mapper.toDTO(service.create(entity));
     }
@@ -53,9 +48,7 @@ public class TransactionController {
     public TransactionDTO update(@RequestParam Long userId, @PathVariable Long id, @RequestBody TransactionDTO dto) {
         Category category = categoryService.getById(dto.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
-        PaymentType paymentType = paymentTypeService.getById(dto.getPaymentTypeId())
-                .orElseThrow(() -> new RuntimeException("PaymentType not found"));
-        Transaction entity = Mapper.toEntity(dto, category, paymentType);
+        Transaction entity = Mapper.toEntity(dto, category);
         entity.setUserId(userId);
         return Mapper.toDTO(service.update(userId, id, entity));
     }

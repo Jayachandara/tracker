@@ -9,7 +9,5 @@ import lombok.*;
 public class CategoryTypeDTO {
     private Long categoryTypeId;
     private Long userId;
-    private Long categoryGroupId;
     private String name;
-    private String description;
 }

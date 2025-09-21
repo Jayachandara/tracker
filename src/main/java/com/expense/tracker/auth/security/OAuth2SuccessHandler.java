@@ -53,6 +53,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
         response.setContentType("application/json");
         response.getWriter().write(objectMapper.writeValueAsString(Map.of(
+                "userId", user.getUserId(),
                 "token", token,
                 "expiresIn", 3600,
                 "email", user.getEmail(),

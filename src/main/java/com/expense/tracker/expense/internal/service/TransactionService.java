@@ -2,6 +2,7 @@ package com.expense.tracker.expense.internal.service;
 
 import com.expense.tracker.expense.internal.entity.Transaction;
 import com.expense.tracker.expense.internal.repository.TransactionRepository;
+import com.expense.tracker.expense.utilities.defaults.PaymentTypeEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -45,10 +46,10 @@ public class TransactionService {
     }
 
     public List<Transaction> getByCategory(Long userId, Long categoryId) {
-        return repository.findByUserIdAndCategory_Id(userId, categoryId);
+        return repository.findByUserIdAndCategory_CategoryId(userId, categoryId);
     }
 
-    public List<Transaction> getByPaymentType(Long userId, Long paymentTypeId) {
-        return repository.findByUserIdAndPaymentType_Id(userId, paymentTypeId);
+    public List<Transaction> getByPaymentType(Long userId, PaymentTypeEnum paymentTypeEnum) {
+        return repository.findByUserIdAndPaymentType(userId, paymentTypeEnum);
     }
 }

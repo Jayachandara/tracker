@@ -1,4 +1,4 @@
-package com.expense.tracker.expense.external.dto;
+package com.expense.tracker.core.dto;
 
 import lombok.*;
 

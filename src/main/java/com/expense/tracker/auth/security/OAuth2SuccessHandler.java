@@ -1,7 +1,7 @@
 package com.expense.tracker.auth.security;
 
 import com.expense.tracker.user.internal.entity.User;
-import com.expense.tracker.user.internal.repository.UserRepository;
+import com.expense.tracker.user.internal.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,12 +15,12 @@ import java.util.Map;
 
 @Component
 public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
-    private final UserRepository userRepository;
+    private final UserService userService;
     private final JwtProvider jwtProvider;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public OAuth2SuccessHandler(UserRepository userRepository, JwtProvider jwtProvider) {
-        this.userRepository = userRepository;
+    public OAuth2SuccessHandler(UserService userService, JwtProvider jwtProvider) {
+        this.userService = userService;
         this.jwtProvider = jwtProvider;
     }
 
@@ -34,20 +34,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
         //String picture = (String) oidcUser.getClaims().get("picture");
         String googleId = oidcUser.getSubject();
 
-        User user = userRepository.findByGoogleId(googleId)
-                .orElseGet(() -> userRepository.findByEmail(email).orElse(null));
-
-        if (user == null) {
-            user = new User();
-            user.setEmail(email);
-            user.setName(name);
-            user.setGoogleId(googleId);
-        } else {
-            user.setName(name);
-            user.setGoogleId(googleId);
-        }
-
-        user = userRepository.save(user);
+        User user = userService.createOrUpdateUser(googleId, email, name);
 
         String token = jwtProvider.createToken(user.getEmail(), user.getUserId());
 

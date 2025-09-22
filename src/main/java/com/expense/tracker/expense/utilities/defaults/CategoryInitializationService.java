@@ -1,10 +1,12 @@
 package com.expense.tracker.expense.utilities.defaults;
 
+import com.expense.tracker.core.event.UserCreatedEvent;
 import com.expense.tracker.expense.internal.entity.Category;
 import com.expense.tracker.expense.internal.entity.CategoryType;
 import com.expense.tracker.expense.internal.repository.CategoryRepository;
 import com.expense.tracker.expense.internal.repository.CategoryTypeRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +21,12 @@ public class CategoryInitializationService {
 
     private final CategoryTypeRepository categoryTypeRepository;
     private final CategoryRepository categoryRepository;
+
+    @EventListener
+    public void onUserCreated(UserCreatedEvent event) {
+        Long userId = event.userId();
+        initializeDefaultsForUser(userId);
+    }
 
     @Transactional
     public void initializeDefaultsForUser(Long userId) {

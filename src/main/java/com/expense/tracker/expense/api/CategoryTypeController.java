@@ -1,6 +1,6 @@
 package com.expense.tracker.expense.api;
 
-import com.expense.tracker.expense.external.dto.CategoryTypeDTO;
+import com.expense.tracker.core.dto.CategoryTypeDTO;
 import com.expense.tracker.expense.internal.entity.CategoryType;
 import com.expense.tracker.expense.internal.service.CategoryTypeService;
 import com.expense.tracker.expense.utilities.Mapper;
@@ -16,14 +16,14 @@ import java.util.List;
 public class CategoryTypeController {
 
     private final CategoryTypeService service;
-    @GetMapping
+    @GetMapping("/getAll")
     public List<CategoryTypeDTO> getAll(@RequestParam Long userId) {
         return service.getAllByUser(userId).stream()
                 .map(Mapper::toDTO)
                 .toList();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("get/{id}")
     public ResponseEntity<CategoryTypeDTO> get(@PathVariable Long id) {
         return service.getById(id)
                 .map(Mapper::toDTO)
@@ -31,21 +31,21 @@ public class CategoryTypeController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public CategoryTypeDTO create(@RequestParam Long userId, @RequestBody CategoryTypeDTO dto) {
         CategoryType entity = Mapper.toEntity(dto);
         entity.setUserId(userId);
         return Mapper.toDTO(service.create(entity));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public CategoryTypeDTO update(@RequestParam Long userId, @PathVariable Long id, @RequestBody CategoryTypeDTO dto) {
         CategoryType entity = Mapper.toEntity(dto);
         entity.setUserId(userId);
         return Mapper.toDTO(service.update(userId, id, entity));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }

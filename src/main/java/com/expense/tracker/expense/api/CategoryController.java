@@ -1,6 +1,6 @@
 package com.expense.tracker.expense.api;
 
-import com.expense.tracker.expense.external.dto.CategoryDTO;
+import com.expense.tracker.core.dto.CategoryDTO;
 import com.expense.tracker.expense.internal.entity.Category;
 import com.expense.tracker.expense.internal.entity.CategoryType;
 import com.expense.tracker.expense.internal.service.CategoryService;
@@ -20,14 +20,15 @@ public class CategoryController {
     private final CategoryService service;
     private final CategoryTypeService typeService;
 
-    @GetMapping
+    @GetMapping("/getAll")
     public List<CategoryDTO> getAll(@RequestParam Long userId) {
+
         return service.getAllByUser(userId).stream()
                 .map(Mapper::toDTO)
                 .toList();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<CategoryDTO> get(@PathVariable Long id) {
         return service.getById(id)
                 .map(Mapper::toDTO)
@@ -35,7 +36,7 @@ public class CategoryController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public CategoryDTO create(@RequestParam Long userId, @RequestBody CategoryDTO dto) {
         CategoryType type = typeService.getById(dto.getCategoryTypeId())
                 .orElseThrow(() -> new RuntimeException("CategoryType not found"));
@@ -44,7 +45,7 @@ public class CategoryController {
         return Mapper.toDTO(service.create(entity));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public CategoryDTO update(@RequestParam Long userId, @PathVariable Long id, @RequestBody CategoryDTO dto) {
         CategoryType type = typeService.getById(dto.getCategoryTypeId())
                 .orElseThrow(() -> new RuntimeException("CategoryType not found"));
@@ -53,7 +54,7 @@ public class CategoryController {
         return Mapper.toDTO(service.update(userId, id, entity));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }

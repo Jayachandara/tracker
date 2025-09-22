@@ -1,6 +1,6 @@
 package com.expense.tracker.expense.api;
 
-import com.expense.tracker.expense.external.dto.TransactionDTO;
+import com.expense.tracker.core.dto.TransactionDTO;
 import com.expense.tracker.expense.internal.entity.Category;
 import com.expense.tracker.expense.internal.entity.Transaction;
 import com.expense.tracker.expense.internal.service.CategoryService;
@@ -20,14 +20,14 @@ public class TransactionController {
     private final TransactionService service;
     private final CategoryService categoryService;
 
-    @GetMapping
+    @GetMapping("/getAll")
     public List<TransactionDTO> getAll(@RequestParam Long userId) {
         return service.getAllByUser(userId).stream()
                 .map(Mapper::toDTO)
                 .toList();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<TransactionDTO> get(@PathVariable Long id) {
         return service.getById(id)
                 .map(Mapper::toDTO)
@@ -35,7 +35,7 @@ public class TransactionController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public TransactionDTO create(@RequestParam Long userId, @RequestBody TransactionDTO dto) {
         Category category = categoryService.getById(dto.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
@@ -44,7 +44,7 @@ public class TransactionController {
         return Mapper.toDTO(service.create(entity));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public TransactionDTO update(@RequestParam Long userId, @PathVariable Long id, @RequestBody TransactionDTO dto) {
         Category category = categoryService.getById(dto.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
@@ -53,7 +53,7 @@ public class TransactionController {
         return Mapper.toDTO(service.update(userId, id, entity));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }

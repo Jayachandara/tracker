@@ -6,6 +6,7 @@ import com.expense.tracker.expense.utilities.defaults.PaymentTypeEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,10 @@ public class TransactionService {
 
     public List<Transaction> getAllByUser(Long userId) {
         return repository.findByUserId(userId);
+    }
+
+    public List<Transaction> getByUserAndDateRange(Long userId, LocalDateTime start, LocalDateTime end) {
+        return repository.findByUserIdAndTransactionDateBetween(userId, start, end);
     }
 
     public Optional<Transaction> getById(Long id) {

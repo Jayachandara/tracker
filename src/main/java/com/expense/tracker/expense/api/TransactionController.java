@@ -14,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.util.List;
 
 @RestController
@@ -28,6 +30,69 @@ public class TransactionController {
     @GetMapping("/getAll")
     public List<TransactionDTO> getAll(@RequestParam Long userId) {
         return service.getAllByUser(userId).stream()
+                .map(Mapper::toDTO)
+                .toList();
+    }
+
+    @GetMapping("/getByDateRange")
+    public List<TransactionDTO> getByDateRange(
+            @RequestParam Long userId,
+            @RequestParam String startDate,
+            @RequestParam String endDate
+    ) {
+        // Parse dates from request (expecting ISO format: yyyy-MM-dd'T'HH:mm:ss)
+        LocalDateTime start;
+        LocalDateTime end;
+        try {
+            start = LocalDateTime.parse(startDate);
+            end = LocalDateTime.parse(endDate);
+        } catch (Exception e) {
+            throw new InvalidRequestException("Invalid date format. Use yyyy-MM-dd'T'HH:mm:ss");
+        }
+
+        // Fetch transactions from service
+        return service.getByUserAndDateRange(userId, start, end).stream()
+                .map(Mapper::toDTO)
+                .toList();
+    }
+
+    @GetMapping("/getByYear")
+    public List<TransactionDTO> getByYear(
+            @RequestParam Long userId,
+            @RequestParam int year
+    ) {
+        if (year < 1900 || year > 3000) {
+            throw new InvalidRequestException("Invalid year: " + year);
+        }
+
+        // Compute start and end of the year
+        LocalDateTime startOfYear = LocalDateTime.of(year, 1, 1, 0, 0);
+        LocalDateTime endOfYear = LocalDateTime.of(year, 12, 31, 23, 59, 59);
+
+        // Fetch transactions from service
+        return service.getByUserAndDateRange(userId, startOfYear, endOfYear).stream()
+                .map(Mapper::toDTO)
+                .toList();
+    }
+
+    @GetMapping("/getByMonth")
+    public List<TransactionDTO> getByMonth(
+            @RequestParam Long userId,
+            @RequestParam int month,
+            @RequestParam(required = false) Integer year
+    ) {
+        int targetYear = (year != null) ? year : java.time.Year.now().getValue();
+
+        if (month < 1 || month > 12) {
+            throw new InvalidRequestException("Invalid month: " + month + ". Must be between 1 and 12.");
+        }
+
+        // Compute start and end of the month
+        YearMonth yearMonth = YearMonth.of(targetYear, month);
+        LocalDateTime startOfMonth = yearMonth.atDay(1).atStartOfDay();
+        LocalDateTime endOfMonth = yearMonth.atEndOfMonth().atTime(23, 59, 59);
+
+        return service.getByUserAndDateRange(userId, startOfMonth, endOfMonth).stream()
                 .map(Mapper::toDTO)
                 .toList();
     }

@@ -22,8 +22,9 @@ public class CategoryDefaults {
                 new CategorySeed("Stocks", CategoryTypeEnum.EQUITY, CategoryGroupEnum.INVESTMENT),
                 new CategorySeed("Mutual Funds", CategoryTypeEnum.EQUITY, CategoryGroupEnum.INVESTMENT),
                 new CategorySeed("Bank Savings", CategoryTypeEnum.BANK, CategoryGroupEnum.SAVINGS),
-                new CategorySeed("Fixed Deposit", CategoryTypeEnum.BANK, CategoryGroupEnum.SAVINGS)
-        );
+                new CategorySeed("Fixed Deposit", CategoryTypeEnum.BANK, CategoryGroupEnum.SAVINGS),
+                new CategorySeed("Personal Loan 1", CategoryTypeEnum.PERSONAL_LOAN, CategoryGroupEnum.LOANS)
+                );
     }
 
     public record CategorySeed(String name, CategoryTypeEnum type, CategoryGroupEnum group) {}

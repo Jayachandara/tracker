@@ -13,5 +13,9 @@ public enum CategoryTypeEnum {
     BUSINESS,
     EQUITY,
     BANK,
+    PERSONAL_LOAN,
+    HOME_LOAN,
+    CAR_LOAN,
+    BIKE_LOAN,
     OTHER
 }

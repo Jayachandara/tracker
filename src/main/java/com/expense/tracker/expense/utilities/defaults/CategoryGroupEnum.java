@@ -4,5 +4,6 @@ public enum CategoryGroupEnum {
     INCOME,
     SAVINGS,
     INVESTMENT,
-    EXPENSES
+    EXPENSES,
+    LOANS
 }

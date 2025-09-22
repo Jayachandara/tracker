@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Mapper {
 
-    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+    //private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 
 
     public static CategoryTypeDTO toDTO(CategoryType entity) {
@@ -59,7 +59,8 @@ public class Mapper {
                 .transactionId(entity.getTransactionId())
                 .userId(entity.getUserId())
                 .amount(entity.getAmount())
-                .transactionDate(entity.getTransactionDate().format(formatter))
+                //.transactionDate(entity.getTransactionDate().format(formatter))
+                .transactionDate(entity.getTransactionDate())
                 .categoryId(entity.getCategory().getCategoryId())
                 .paymentType(entity.getPaymentType())
                 .description(entity.getDescription())
@@ -72,7 +73,8 @@ public class Mapper {
                 .transactionId(dto.getTransactionId())
                 .userId(dto.getUserId())
                 .amount(dto.getAmount())
-                .transactionDate(LocalDateTime.parse(dto.getTransactionDate()))
+                //.transactionDate(LocalDateTime.parse(dto.getTransactionDate()))
+                .transactionDate(dto.getTransactionDate())
                 .category(category)
                 .paymentType(dto.getPaymentType())
                 .description(dto.getDescription())

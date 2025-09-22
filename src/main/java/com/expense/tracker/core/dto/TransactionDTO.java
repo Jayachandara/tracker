@@ -13,7 +13,7 @@ public class TransactionDTO {
     private Long transactionId;
     private Long userId;
     private Double amount;
-    private String transactionDate;
+    private LocalDateTime transactionDate;
     private Long categoryId;
     private PaymentTypeEnum paymentType;
     private String description;

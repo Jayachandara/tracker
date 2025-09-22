@@ -32,17 +32,31 @@ public class CategoryTypeController {
     }
 
     @PostMapping("/create")
-    public CategoryTypeDTO create(@RequestParam Long userId, @RequestBody CategoryTypeDTO dto) {
+    public CategoryTypeDTO create(@RequestBody CategoryTypeDTO dto) {
+        // Map DTO to entity
         CategoryType entity = Mapper.toEntity(dto);
-        entity.setUserId(userId);
+
+        // userId comes from JSON body
+        entity.setUserId(dto.getUserId());
+
+        // Save and return DTO
         return Mapper.toDTO(service.create(entity));
     }
 
-    @PutMapping("/update/{id}")
-    public CategoryTypeDTO update(@RequestParam Long userId, @PathVariable Long id, @RequestBody CategoryTypeDTO dto) {
+    @PutMapping("/update")
+    public CategoryTypeDTO update(@RequestBody CategoryTypeDTO dto) {
+        if (dto.getCategoryTypeId() == null) {
+            throw new IllegalArgumentException("CategoryType ID is required for update");
+        }
+
+        // Map DTO to entity
         CategoryType entity = Mapper.toEntity(dto);
-        entity.setUserId(userId);
-        return Mapper.toDTO(service.update(userId, id, entity));
+
+        // userId comes from JSON body
+        entity.setUserId(dto.getUserId());
+
+        // Update and return DTO
+        return Mapper.toDTO(service.update(dto.getUserId(), dto.getCategoryTypeId(), entity));
     }
 
     @DeleteMapping("/delete/{id}")

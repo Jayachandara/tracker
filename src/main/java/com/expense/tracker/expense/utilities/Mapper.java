@@ -5,7 +5,13 @@ import com.expense.tracker.core.dto.CategoryTypeDTO;
 import com.expense.tracker.core.dto.TransactionDTO;
 import com.expense.tracker.expense.internal.entity.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Mapper {
+
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+
 
     public static CategoryTypeDTO toDTO(CategoryType entity) {
         if(entity == null) return null;
@@ -53,7 +59,7 @@ public class Mapper {
                 .transactionId(entity.getTransactionId())
                 .userId(entity.getUserId())
                 .amount(entity.getAmount())
-                .transactionDate(entity.getTransactionDate())
+                .transactionDate(entity.getTransactionDate().format(formatter))
                 .categoryId(entity.getCategory().getCategoryId())
                 .paymentType(entity.getPaymentType())
                 .description(entity.getDescription())
@@ -66,7 +72,7 @@ public class Mapper {
                 .transactionId(dto.getTransactionId())
                 .userId(dto.getUserId())
                 .amount(dto.getAmount())
-                .transactionDate(dto.getTransactionDate())
+                .transactionDate(LocalDateTime.parse(dto.getTransactionDate()))
                 .category(category)
                 .paymentType(dto.getPaymentType())
                 .description(dto.getDescription())

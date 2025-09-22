@@ -1,6 +1,7 @@
 package com.expense.tracker.core.dto;
 
 import com.expense.tracker.expense.utilities.defaults.PaymentTypeEnum;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import java.time.LocalDateTime;
 
@@ -12,7 +13,7 @@ public class TransactionDTO {
     private Long transactionId;
     private Long userId;
     private Double amount;
-    private LocalDateTime transactionDate;
+    private String transactionDate;
     private Long categoryId;
     private PaymentTypeEnum paymentType;
     private String description;

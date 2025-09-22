@@ -37,21 +37,39 @@ public class CategoryController {
     }
 
     @PostMapping("/create")
-    public CategoryDTO create(@RequestParam Long userId, @RequestBody CategoryDTO dto) {
+    public CategoryDTO create(@RequestBody CategoryDTO dto) {
+        // Validate category type
         CategoryType type = typeService.getById(dto.getCategoryTypeId())
                 .orElseThrow(() -> new RuntimeException("CategoryType not found"));
+
+        // Map DTO to entity
         Category entity = Mapper.toEntity(dto, type);
-        entity.setUserId(userId);
+
+        // userId comes from JSON body
+        entity.setUserId(dto.getUserId());
+
+        // Save and return DTO
         return Mapper.toDTO(service.create(entity));
     }
 
-    @PutMapping("/update/{id}")
-    public CategoryDTO update(@RequestParam Long userId, @PathVariable Long id, @RequestBody CategoryDTO dto) {
+    @PutMapping("/update")
+    public CategoryDTO update(@RequestBody CategoryDTO dto) {
+        if (dto.getCategoryId() == null) {
+            throw new IllegalArgumentException("Category ID is required for update");
+        }
+
+        // Validate category type
         CategoryType type = typeService.getById(dto.getCategoryTypeId())
                 .orElseThrow(() -> new RuntimeException("CategoryType not found"));
+
+        // Map DTO to entity
         Category entity = Mapper.toEntity(dto, type);
-        entity.setUserId(userId);
-        return Mapper.toDTO(service.update(userId, id, entity));
+
+        // userId comes from JSON body
+        entity.setUserId(dto.getUserId());
+
+        // Update and return DTO
+        return Mapper.toDTO(service.update(dto.getUserId(), dto.getCategoryId(), entity));
     }
 
     @DeleteMapping("/delete/{id}")

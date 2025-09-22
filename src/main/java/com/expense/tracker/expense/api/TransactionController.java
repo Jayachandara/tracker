@@ -36,21 +36,39 @@ public class TransactionController {
     }
 
     @PostMapping("/create")
-    public TransactionDTO create(@RequestParam Long userId, @RequestBody TransactionDTO dto) {
+    public TransactionDTO create(@RequestBody TransactionDTO dto) {
+        // Validate category
         Category category = categoryService.getById(dto.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
+
+        // Map DTO to entity
         Transaction entity = Mapper.toEntity(dto, category);
-        entity.setUserId(userId);
+
+        // userId comes from JSON body, no need for @RequestParam
+        entity.setUserId(dto.getUserId());
+
+        // Save and return DTO
         return Mapper.toDTO(service.create(entity));
     }
 
-    @PutMapping("/update/{id}")
-    public TransactionDTO update(@RequestParam Long userId, @PathVariable Long id, @RequestBody TransactionDTO dto) {
+    @PutMapping("/update")
+    public TransactionDTO update(@RequestBody TransactionDTO dto) {
+        if (dto.getTransactionId() == null) {
+            throw new IllegalArgumentException("Transaction ID is required for update");
+        }
+
+        // Validate category
         Category category = categoryService.getById(dto.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
+
+        // Map DTO to entity
         Transaction entity = Mapper.toEntity(dto, category);
-        entity.setUserId(userId);
-        return Mapper.toDTO(service.update(userId, id, entity));
+
+        // userId comes from JSON body
+        entity.setUserId(dto.getUserId());
+
+        // Update and return DTO
+        return Mapper.toDTO(service.update(dto.getUserId(), dto.getTransactionId(), entity));
     }
 
     @DeleteMapping("/delete/{id}")

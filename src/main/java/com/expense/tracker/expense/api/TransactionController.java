@@ -2,6 +2,7 @@ package com.expense.tracker.expense.api;
 
 import com.expense.tracker.core.dto.TransactionDTO;
 import com.expense.tracker.core.dto.request.TransactionRequestDTO;
+import com.expense.tracker.core.exception.InvalidRequestException;
 import com.expense.tracker.core.exception.ResourceNotFoundException;
 import com.expense.tracker.expense.internal.entity.Category;
 import com.expense.tracker.expense.internal.entity.Transaction;
@@ -56,6 +57,11 @@ public class TransactionController {
     // UPDATE transaction
     @PutMapping("/update/{id}")
     public TransactionDTO update(@PathVariable Long id, @Valid @RequestBody TransactionRequestDTO requestDTO) {
+
+        if (id == null) {
+            throw new InvalidRequestException("Transaction ID is required for update");
+        }
+
         // Check if transaction exists
         Transaction existing = service.getById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Transaction not found with ID: " + id));

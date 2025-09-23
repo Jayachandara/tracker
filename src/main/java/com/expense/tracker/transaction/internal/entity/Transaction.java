@@ -1,6 +1,6 @@
-package com.expense.tracker.expense.internal.entity;
+package com.expense.tracker.transaction.internal.entity;
 
-import com.expense.tracker.expense.utilities.defaults.PaymentTypeEnum;
+import com.expense.tracker.transaction.utilities.defaults.PaymentTypeEnum;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;

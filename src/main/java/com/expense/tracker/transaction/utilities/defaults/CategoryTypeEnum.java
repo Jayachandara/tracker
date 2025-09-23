@@ -1,4 +1,4 @@
-package com.expense.tracker.expense.utilities.defaults;
+package com.expense.tracker.transaction.utilities.defaults;
 
 public enum CategoryTypeEnum {
     // INCOME

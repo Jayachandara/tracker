@@ -1,8 +1,8 @@
-package com.expense.tracker.expense.internal.service;
+package com.expense.tracker.transaction.internal.service;
 
-import com.expense.tracker.expense.internal.entity.Transaction;
-import com.expense.tracker.expense.internal.repository.TransactionRepository;
-import com.expense.tracker.expense.utilities.defaults.PaymentTypeEnum;
+import com.expense.tracker.transaction.internal.entity.Transaction;
+import com.expense.tracker.transaction.internal.repository.TransactionRepository;
+import com.expense.tracker.transaction.utilities.defaults.PaymentTypeEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

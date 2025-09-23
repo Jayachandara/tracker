@@ -1,8 +1,8 @@
-package com.expense.tracker.expense.utilities.defaults;
+package com.expense.tracker.transaction.utilities.defaults;
 
 import com.expense.tracker.core.event.UserCreatedEvent;
-import com.expense.tracker.expense.internal.entity.Category;
-import com.expense.tracker.expense.internal.repository.CategoryRepository;
+import com.expense.tracker.transaction.internal.entity.Category;
+import com.expense.tracker.transaction.internal.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;

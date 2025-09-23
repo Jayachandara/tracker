@@ -1,7 +1,7 @@
-package com.expense.tracker.expense.internal.repository;
+package com.expense.tracker.transaction.internal.repository;
 
-import com.expense.tracker.expense.internal.entity.Category;
-import com.expense.tracker.expense.utilities.defaults.CategoryTypeEnum;
+import com.expense.tracker.transaction.internal.entity.Category;
+import com.expense.tracker.transaction.utilities.defaults.CategoryTypeEnum;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

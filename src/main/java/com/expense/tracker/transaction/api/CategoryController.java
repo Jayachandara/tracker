@@ -1,12 +1,12 @@
-package com.expense.tracker.expense.api;
+package com.expense.tracker.transaction.api;
 
 import com.expense.tracker.core.dto.CategoryDTO;
 import com.expense.tracker.core.dto.request.CategoryRequestDTO;
 import com.expense.tracker.core.exception.InvalidRequestException;
 import com.expense.tracker.core.exception.ResourceNotFoundException;
-import com.expense.tracker.expense.internal.entity.Category;
-import com.expense.tracker.expense.internal.service.CategoryService;
-import com.expense.tracker.expense.utilities.Mapper;
+import com.expense.tracker.transaction.internal.entity.Category;
+import com.expense.tracker.transaction.internal.service.CategoryService;
+import com.expense.tracker.transaction.utilities.Mapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

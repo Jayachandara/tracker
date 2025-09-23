@@ -1,7 +1,7 @@
 package com.expense.tracker.core.dto.request;
 
-import com.expense.tracker.expense.utilities.defaults.CategoryGroupEnum;
-import com.expense.tracker.expense.utilities.defaults.CategoryTypeEnum;
+import com.expense.tracker.transaction.utilities.defaults.CategoryGroupEnum;
+import com.expense.tracker.transaction.utilities.defaults.CategoryTypeEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;

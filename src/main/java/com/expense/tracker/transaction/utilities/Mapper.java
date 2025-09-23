@@ -1,10 +1,10 @@
-package com.expense.tracker.expense.utilities;
+package com.expense.tracker.transaction.utilities;
 
 import com.expense.tracker.core.dto.CategoryDTO;
 import com.expense.tracker.core.dto.TransactionDTO;
 import com.expense.tracker.core.dto.request.CategoryRequestDTO;
 import com.expense.tracker.core.dto.request.TransactionRequestDTO;
-import com.expense.tracker.expense.internal.entity.*;
+import com.expense.tracker.transaction.internal.entity.*;
 
 public class Mapper {
 

@@ -1,7 +1,7 @@
 package com.expense.tracker.core.dto;
 
-import com.expense.tracker.expense.utilities.defaults.CategoryGroupEnum;
-import com.expense.tracker.expense.utilities.defaults.CategoryTypeEnum;
+import com.expense.tracker.transaction.utilities.defaults.CategoryGroupEnum;
+import com.expense.tracker.transaction.utilities.defaults.CategoryTypeEnum;
 import lombok.*;
 
 @Data

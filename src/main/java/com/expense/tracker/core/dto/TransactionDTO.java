@@ -1,7 +1,6 @@
 package com.expense.tracker.core.dto;
 
-import com.expense.tracker.expense.utilities.defaults.PaymentTypeEnum;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.expense.tracker.transaction.utilities.defaults.PaymentTypeEnum;
 import lombok.*;
 import java.time.LocalDateTime;
 

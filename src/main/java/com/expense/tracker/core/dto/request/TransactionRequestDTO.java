@@ -1,6 +1,6 @@
 package com.expense.tracker.core.dto.request;
 
-import com.expense.tracker.expense.utilities.defaults.PaymentTypeEnum;
+import com.expense.tracker.transaction.utilities.defaults.PaymentTypeEnum;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import java.time.LocalDateTime;

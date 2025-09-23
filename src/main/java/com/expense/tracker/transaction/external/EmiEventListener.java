@@ -1,11 +1,11 @@
-package com.expense.tracker.expense.external;
+package com.expense.tracker.transaction.external;
 
 import com.expense.tracker.core.event.EmiEvent;
 import com.expense.tracker.core.event.LoanTransactionEvent;
-import com.expense.tracker.expense.internal.entity.Category;
-import com.expense.tracker.expense.internal.entity.Transaction;
-import com.expense.tracker.expense.internal.service.CategoryService;
-import com.expense.tracker.expense.internal.service.TransactionService;
+import com.expense.tracker.transaction.internal.entity.Category;
+import com.expense.tracker.transaction.internal.entity.Transaction;
+import com.expense.tracker.transaction.internal.service.CategoryService;
+import com.expense.tracker.transaction.internal.service.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.event.EventListener;

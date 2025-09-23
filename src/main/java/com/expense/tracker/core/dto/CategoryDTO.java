@@ -1,6 +1,7 @@
 package com.expense.tracker.core.dto;
 
 import com.expense.tracker.expense.utilities.defaults.CategoryGroupEnum;
+import com.expense.tracker.expense.utilities.defaults.CategoryTypeEnum;
 import lombok.*;
 
 @Data
@@ -11,6 +12,6 @@ public class CategoryDTO {
     private Long categoryId;
     private String name;
     private Long userId;
-    private Long categoryTypeId;
+    private CategoryTypeEnum categoryType;
     private CategoryGroupEnum categoryGroup;
 }

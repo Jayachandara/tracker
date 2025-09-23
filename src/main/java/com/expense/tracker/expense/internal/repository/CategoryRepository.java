@@ -1,7 +1,7 @@
 package com.expense.tracker.expense.internal.repository;
 
 import com.expense.tracker.expense.internal.entity.Category;
-import com.expense.tracker.expense.internal.entity.CategoryType;
+import com.expense.tracker.expense.utilities.defaults.CategoryTypeEnum;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +13,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     List<Category> findByUserId(Long userId);
 
-    List<Category> findByUserIdAndCategoryType_CategoryTypeId(Long userId, Long typeId);
+    List<Category> findByUserIdAndCategoryType(Long userId, CategoryTypeEnum type);
 
     Optional<Category> findByUserIdAndName(Long userId, String name);
 

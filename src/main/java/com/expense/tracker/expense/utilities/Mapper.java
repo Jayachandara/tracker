@@ -1,33 +1,12 @@
 package com.expense.tracker.expense.utilities;
 
 import com.expense.tracker.core.dto.CategoryDTO;
-import com.expense.tracker.core.dto.CategoryTypeDTO;
 import com.expense.tracker.core.dto.TransactionDTO;
 import com.expense.tracker.core.dto.request.CategoryRequestDTO;
-import com.expense.tracker.core.dto.request.CategoryTypeRequestDTO;
 import com.expense.tracker.core.dto.request.TransactionRequestDTO;
 import com.expense.tracker.expense.internal.entity.*;
 
 public class Mapper {
-
-    // ---------------- CategoryType ----------------
-    public static CategoryTypeDTO toDTO(CategoryType entity) {
-        if (entity == null) return null;
-        return CategoryTypeDTO.builder()
-                .categoryTypeId(entity.getCategoryTypeId())
-                .userId(entity.getUserId())
-                .name(entity.getName())
-                .build();
-    }
-
-    public static CategoryType toEntity(Long id, CategoryTypeRequestDTO dto) {
-        if (dto == null) return null;
-        return CategoryType.builder()
-                .categoryTypeId(id)
-                .userId(dto.getUserId())
-                .name(dto.getName())
-                .build();
-    }
 
     // ---------------- Category ----------------
     public static CategoryDTO toDTO(Category entity) {
@@ -35,18 +14,18 @@ public class Mapper {
         return CategoryDTO.builder()
                 .categoryId(entity.getCategoryId())
                 .userId(entity.getUserId())
-                .categoryTypeId(entity.getCategoryType().getCategoryTypeId())
+                .categoryType(entity.getCategoryType())
                 .categoryGroup(entity.getCategoryGroup())
                 .name(entity.getName())
                 .build();
     }
 
-    public static Category toEntity(Long id, CategoryRequestDTO dto, CategoryType type) {
+    public static Category toEntity(Long id, CategoryRequestDTO dto) {
         if (dto == null) return null;
         return Category.builder()
                 .categoryId(id)
                 .userId(dto.getUserId())
-                .categoryType(type)
+                .categoryType(dto.getCategoryType())
                 .categoryGroup(dto.getCategoryGroup())
                 .name(dto.getName())
                 .build();

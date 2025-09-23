@@ -1,6 +1,7 @@
 package com.expense.tracker.expense.internal.entity;
 
 import com.expense.tracker.expense.utilities.defaults.CategoryGroupEnum;
+import com.expense.tracker.expense.utilities.defaults.CategoryTypeEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,17 +18,14 @@ public class Category {
     @Column(name = "category_id")
     private Long categoryId;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 100, unique = true)
     private String name;
 
     @Column(nullable = false)
     private Long userId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_type_id", nullable = false)
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private CategoryType categoryType;
+    @Enumerated(EnumType.STRING)
+    private CategoryTypeEnum categoryType;
 
     @Enumerated(EnumType.STRING)
     private CategoryGroupEnum categoryGroup;

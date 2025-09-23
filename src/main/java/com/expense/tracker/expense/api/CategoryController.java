@@ -5,9 +5,7 @@ import com.expense.tracker.core.dto.request.CategoryRequestDTO;
 import com.expense.tracker.core.exception.InvalidRequestException;
 import com.expense.tracker.core.exception.ResourceNotFoundException;
 import com.expense.tracker.expense.internal.entity.Category;
-import com.expense.tracker.expense.internal.entity.CategoryType;
 import com.expense.tracker.expense.internal.service.CategoryService;
-import com.expense.tracker.expense.internal.service.CategoryTypeService;
 import com.expense.tracker.expense.utilities.Mapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +20,6 @@ import java.util.List;
 public class CategoryController {
 
     private final CategoryService service;
-    private final CategoryTypeService typeService;
 
     // GET all categories for a user
     @GetMapping("/getAll")
@@ -43,12 +40,8 @@ public class CategoryController {
     // CREATE category
     @PostMapping("/create")
     public CategoryDTO create(@Valid @RequestBody CategoryRequestDTO requestDTO) {
-        // Validate category type
-        CategoryType type = typeService.getById(requestDTO.getCategoryTypeId())
-                .orElseThrow(() -> new ResourceNotFoundException("CategoryType not found with ID: " + requestDTO.getCategoryTypeId()));
-
         // Map request DTO to entity
-        Category entity = Mapper.toEntity(null, requestDTO, type);
+        Category entity = Mapper.toEntity(null, requestDTO);
 
         // Save and return DTO
         return Mapper.toDTO(service.create(entity));
@@ -64,12 +57,8 @@ public class CategoryController {
         Category existing = service.getById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found with ID: " + id));
 
-        // Validate category type
-        CategoryType type = typeService.getById(requestDTO.getCategoryTypeId())
-                .orElseThrow(() -> new ResourceNotFoundException("CategoryType not found with ID: " + requestDTO.getCategoryTypeId()));
-
         // Map request DTO to entity
-        Category entity = Mapper.toEntity(id, requestDTO, type);
+        Category entity = Mapper.toEntity(id, requestDTO);
         entity.setCategoryId(id);
         entity.setUserId(existing.getUserId()); // preserve original userId
 

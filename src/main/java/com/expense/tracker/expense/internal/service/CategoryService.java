@@ -22,6 +22,11 @@ public class CategoryService {
         return repository.findById(id);
     }
 
+    public Category getByUserAndName(Long userId, String name) {
+        return repository.findByUserIdAndName(userId, name)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+    }
+
     public Category create(Category category) {
         return repository.save(category);
     }

@@ -12,6 +12,5 @@ public class CategoryDTO {
     private Long categoryId;
     private String name;
     private Long userId;
-    private CategoryTypeEnum categoryType;
-    private CategoryGroupEnum categoryGroup;
+    private String categoryType;
 }

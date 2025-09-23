@@ -14,7 +14,6 @@ CREATE TABLE category (
     name VARCHAR(100) NOT NULL,
     user_id BIGINT NOT NULL,
     category_type VARCHAR(100) NOT NULL,
-    category_group VARCHAR(100) NOT NULL,
     CONSTRAINT fk_category_category_type
         FOREIGN KEY (category_type_id)
         REFERENCES category_type(category_type_id)

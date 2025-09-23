@@ -19,8 +19,6 @@ public class CategoryRequestDTO {
     private Long userId;
 
     @NotNull(message = "Category Type ID is required")
-    private CategoryTypeEnum categoryType;
+    private String categoryType;
 
-    @NotNull(message = "Category Group is required")
-    private CategoryGroupEnum categoryGroup;
 }

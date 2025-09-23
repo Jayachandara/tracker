@@ -6,26 +6,26 @@ public class CategoryDefaults {
 
     public static List<CategorySeed> getDefaults() {
         return List.of(
-                new CategorySeed("Home Rent", CategoryTypeEnum.HOME, CategoryGroupEnum.EXPENSES),
-                new CategorySeed("Home Groceries", CategoryTypeEnum.HOME, CategoryGroupEnum.EXPENSES),
-                new CategorySeed("Electricity", CategoryTypeEnum.UTILITIES, CategoryGroupEnum.EXPENSES),
-                new CategorySeed("Water", CategoryTypeEnum.UTILITIES, CategoryGroupEnum.EXPENSES),
-                new CategorySeed("Internet", CategoryTypeEnum.UTILITIES, CategoryGroupEnum.EXPENSES),
-                new CategorySeed("Housekeeping", CategoryTypeEnum.SERVICES, CategoryGroupEnum.EXPENSES),
-                new CategorySeed("Repairs", CategoryTypeEnum.SERVICES, CategoryGroupEnum.EXPENSES),
-                new CategorySeed("Restaurant", CategoryTypeEnum.FOOD, CategoryGroupEnum.EXPENSES),
-                new CategorySeed("Snacks", CategoryTypeEnum.FOOD, CategoryGroupEnum.EXPENSES),
-                new CategorySeed("Fuel", CategoryTypeEnum.TRANSPORT, CategoryGroupEnum.EXPENSES),
-                new CategorySeed("Public Transport", CategoryTypeEnum.TRANSPORT, CategoryGroupEnum.EXPENSES),
-                new CategorySeed("Salary", CategoryTypeEnum.JOB, CategoryGroupEnum.INCOME),
-                new CategorySeed("Bonus", CategoryTypeEnum.JOB, CategoryGroupEnum.INCOME),
-                new CategorySeed("Stocks", CategoryTypeEnum.EQUITY, CategoryGroupEnum.INVESTMENT),
-                new CategorySeed("Mutual Funds", CategoryTypeEnum.EQUITY, CategoryGroupEnum.INVESTMENT),
-                new CategorySeed("Bank Savings", CategoryTypeEnum.BANK, CategoryGroupEnum.SAVINGS),
-                new CategorySeed("Fixed Deposit", CategoryTypeEnum.BANK, CategoryGroupEnum.SAVINGS),
-                new CategorySeed("Personal Loan 1", CategoryTypeEnum.PERSONAL_LOAN, CategoryGroupEnum.LOANS)
+                new CategorySeed("Home Rent", CategoryTypeEnum.HOUSING.getName()),
+                new CategorySeed("Home Groceries", CategoryTypeEnum.HOUSING.getName()),
+                new CategorySeed("Electricity", CategoryTypeEnum.UTILITIES.getName()),
+                new CategorySeed("Water", CategoryTypeEnum.UTILITIES.getName()),
+                new CategorySeed("Internet", CategoryTypeEnum.UTILITIES.getName()),
+                new CategorySeed("Housekeeping", CategoryTypeEnum.SERVICES.getName()),
+                new CategorySeed("Repairs", CategoryTypeEnum.SERVICES.getName()),
+                new CategorySeed("Restaurant", CategoryTypeEnum.FOOD.getName()),
+                new CategorySeed("Snacks", CategoryTypeEnum.FOOD.getName()),
+                new CategorySeed("Fuel", CategoryTypeEnum.TRANSPORT.getName()),
+                new CategorySeed("Public Transport", CategoryTypeEnum.TRANSPORT.getName()),
+                new CategorySeed("Salary", CategoryTypeEnum.JOB.getName()),
+                new CategorySeed("Bonus", CategoryTypeEnum.JOB.getName()),
+                new CategorySeed("Reliance Stocks", CategoryTypeEnum.STOCKS.getName()),
+                new CategorySeed("HDFC Mutual Funds", CategoryTypeEnum.MUTUAL_FUNDS.getName()),
+                new CategorySeed("HDFC Bank Savings", CategoryTypeEnum.SAVINGS_ACCOUNT.getName()),
+                new CategorySeed("HDFC Fixed Deposit", CategoryTypeEnum.FIXED_DEPOSIT.getName()),
+                new CategorySeed("HDFC Personal Loan 1", CategoryTypeEnum.PERSONAL_LOAN.getName())
                 );
     }
 
-    public record CategorySeed(String name, CategoryTypeEnum type, CategoryGroupEnum group) {}
+    public record CategorySeed(String name, String type) {}
 }

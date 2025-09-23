@@ -24,9 +24,6 @@ public class Category {
     @Column(nullable = false)
     private Long userId;
 
-    @Enumerated(EnumType.STRING)
-    private CategoryTypeEnum categoryType;
+    private String categoryType;
 
-    @Enumerated(EnumType.STRING)
-    private CategoryGroupEnum categoryGroup;
 }

@@ -33,7 +33,6 @@ public class CategoryInitializationService {
                             .userId(userId)
                             .name(seed.name())                  // enum name
                             .categoryType(seed.type())          // CategoryTypeEnum
-                            .categoryGroup(seed.group())        // CategoryGroupEnum
                             .build())
                     .toList();
 

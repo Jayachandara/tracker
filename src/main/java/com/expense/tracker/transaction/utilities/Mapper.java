@@ -15,7 +15,6 @@ public class Mapper {
                 .categoryId(entity.getCategoryId())
                 .userId(entity.getUserId())
                 .categoryType(entity.getCategoryType())
-                .categoryGroup(entity.getCategoryGroup())
                 .name(entity.getName())
                 .build();
     }
@@ -26,7 +25,6 @@ public class Mapper {
                 .categoryId(id)
                 .userId(dto.getUserId())
                 .categoryType(dto.getCategoryType())
-                .categoryGroup(dto.getCategoryGroup())
                 .name(dto.getName())
                 .build();
     }

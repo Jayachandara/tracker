@@ -36,9 +36,8 @@ public class Mapper {
                 .transactionId(entity.getTransactionId())
                 .userId(entity.getUserId())
                 .amount(entity.getAmount())
-                .transactionDate(entity.getTransactionDate())
                 .categoryId(entity.getCategory().getCategoryId())
-                .paymentType(entity.getPaymentType())
+              //  .paymentType(entity.getPaymentType())
                 .description(entity.getDescription())
                 .build();
     }
@@ -66,7 +65,7 @@ public class Mapper {
                 .amount(dto.getAmount())
                 .transactionDate(dto.getTransactionDate())
                 .category(category)
-                .paymentType(dto.getPaymentType())
+               // .paymentType(dto.getPaymentType())
                 .description(dto.getDescription())
                 .build();
     }

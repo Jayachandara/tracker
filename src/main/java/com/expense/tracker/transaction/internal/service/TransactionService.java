@@ -36,11 +36,32 @@ public class TransactionService {
         return repository.findById(id)
                 .filter(tx -> tx.getUserId().equals(userId))
                 .map(existing -> {
+                    // core fields
+                    existing.setTransactionId(updated.getTransactionId());
                     existing.setAmount(updated.getAmount());
                     existing.setTransactionDate(updated.getTransactionDate());
                     existing.setCategory(updated.getCategory());
                     existing.setPaymentType(updated.getPaymentType());
                     existing.setDescription(updated.getDescription());
+
+
+                    // DR/CR and account
+                    existing.setDrCr(updated.getDrCr());
+                    existing.setAccount(updated.getAccount());
+
+                    // expense / income fields
+                    existing.setExpense(updated.getExpense());
+                    existing.setIncome(updated.getIncome());
+
+                    // tags, note
+                    existing.setTags(updated.getTags());
+                    existing.setNote(updated.getNote());
+
+                    // irregular and reimbursement
+                    existing.setIsIrregularSpends(updated.getIsIrregularSpends());
+                    existing.setIsReimbursable(updated.getIsReimbursable());
+                    existing.setReimbursementid(updated.getReimbursementid());
+
                     return repository.save(existing);
                 }).orElseThrow(() -> new RuntimeException("Transaction not found"));
     }

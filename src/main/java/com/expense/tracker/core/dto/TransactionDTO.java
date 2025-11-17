@@ -1,8 +1,8 @@
 package com.expense.tracker.core.dto;
 
-import com.expense.tracker.transaction.utilities.defaults.PaymentTypeEnum;
 import lombok.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -10,10 +10,19 @@ import java.time.LocalDateTime;
 @Builder
 public class TransactionDTO {
     private Long transactionId;
-    private Long userId;
-    private Double amount;
     private LocalDateTime transactionDate;
+    private Double amount;
+    private String drCr;
+    private String account;
+    private String expense;
+    private String income;
     private Long categoryId;
-    private PaymentTypeEnum paymentType;
+    private String categoryName;
+    private List<String> tags;
+    private String note;
+    private Boolean isIrregularSpends;
+    private Boolean isReimbursable;
+    private Long reimbursementid;
     private String description;
+    private Long userId;
 }
